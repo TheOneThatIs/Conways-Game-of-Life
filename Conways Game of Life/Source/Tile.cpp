@@ -1,7 +1,7 @@
 #include "Tile.h"
 #include<vector>
 
-Tile::Tile() {
+Tile::Tile() : isAlive(false), willDie(false) {
 
 }
 

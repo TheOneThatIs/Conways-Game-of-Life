@@ -5,14 +5,15 @@
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Window");
-	Grid grid(100, 100);
+	Grid grid(10, 5);
 
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed) {
+				grid.clear();
 				window.close();
-
+			}
 			grid.update();
 		}
 

@@ -4,11 +4,12 @@
 
 class Grid {
 private:
-	std::vector<std::vector<Tile*>*> grid;
+	std::vector<std::vector<Tile*>> grid;
 
 public:
 	Grid(int width, int height);
 
+	void clear();
 	void update();
 
 };

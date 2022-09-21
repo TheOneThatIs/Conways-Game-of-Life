@@ -1,20 +1,27 @@
 #include "Grid.h"
 
 
-Grid::Grid(int width = 0, int height = 0) {
+Grid::Grid(int width = 100, int height = 100) {
 	grid.reserve(height);
 
-	for (int i = 0; i <= width; i++) {
-		std::vector<Tile*>* vec = new std::vector<Tile*>;
-		vec->reserve(width);
-		grid.emplace_back(vec);
+	for (int i = 0; i <= height; i++) {
+		grid.emplace_back(std::vector<Tile*>());
+		grid.back().reserve(width);
 
-		for (int j = 0; j <= height; j++) {
-			grid[i]->emplace_back(new Tile);
+		for (int j = 0; j <= width; j++) {
+			grid[i].emplace_back(new Tile());
+		}
+	}
+}
+
+void Grid::clear() {
+	for (int i = 0; i < grid.size(); i++) {
+		for (int j = 0; j < grid[i].size(); j++) {
+			delete grid[i][j];
 		}
 	}
 }
 
 void Grid::update() {
-	grid[1][2][4]->checkLivingConditions();
+	grid[1][2]->checkLivingConditions();
 }
