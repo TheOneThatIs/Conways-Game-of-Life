@@ -19,7 +19,9 @@ void Grid::clear() {
 		for (int j = 0; j < grid[i].size(); j++) {
 			delete grid[i][j];
 		}
+		grid[i].clear();
 	}
+	grid.clear();
 }
 
 void Grid::update() {
