@@ -1,4 +1,5 @@
 #include "Grid.h"
+#include<iostream>
 
 Grid::Grid(int width = 10, int height = 10) : TILE_WIDTH(50), TILE_HEIGHT(50), width(width), height(height) {
 	grid.reserve(height);
@@ -9,7 +10,7 @@ Grid::Grid(int width = 10, int height = 10) : TILE_WIDTH(50), TILE_HEIGHT(50), w
 
 		for (int j = 0; j < width; j++) {
 			grid[i].emplace_back(new Tile());
-			grid[i].back()->setPos(i * TILE_WIDTH, j * TILE_HEIGHT);
+			grid[i].back()->setPos(j * TILE_WIDTH, i * TILE_HEIGHT);
 			grid[i].back()->getShape()->setSize({TILE_WIDTH, TILE_HEIGHT});
 		}
 	}
@@ -36,6 +37,7 @@ void Grid::update() {
 void Grid::render(sf::RenderWindow *windowHandle) {
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
+			//std::cout << "Drawing: [" << i << "], [" << j << "]" << std::endl;
 			windowHandle->draw(*grid[i][j]->getShape());
 		}
 	}
