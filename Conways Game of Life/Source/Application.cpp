@@ -10,8 +10,11 @@ int main() {
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed) {
-				window.close();
+			switch (event.type) {
+				case sf::Event::Closed:
+					window.close();
+				case sf::Event::MouseButtonPressed:
+					grid.set(sf::Mouse::getPosition(window));
 			}
 			grid.update();
 		}

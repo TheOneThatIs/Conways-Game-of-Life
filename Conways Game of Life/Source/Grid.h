@@ -14,6 +14,7 @@ public:
 	void clear();
 	void update();
 	void render(sf::RenderWindow *windowHandle);
+	void set(sf::Vector2i mousePos);
 	
 	float getWidth();
 	float getHeight();

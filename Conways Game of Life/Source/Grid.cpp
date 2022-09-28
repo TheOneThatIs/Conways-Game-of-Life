@@ -37,10 +37,15 @@ void Grid::update() {
 void Grid::render(sf::RenderWindow *windowHandle) {
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
-			//std::cout << "Drawing: [" << i << "], [" << j << "]" << std::endl;
-			windowHandle->draw(*grid[i][j]->getShape());
+			if(grid[i][j]->isAlive) {
+				windowHandle->draw(*grid[i][j]->getShape());
+			}
 		}
 	}
+}
+
+void Grid::set(sf::Vector2i mousePos) {
+	grid[mousePos.y / TILE_HEIGHT][mousePos.x / TILE_WIDTH ]->isAlive = !grid[mousePos.y / TILE_HEIGHT][mousePos.x / TILE_WIDTH]->isAlive;
 }
 
 float Grid::getWidth() { return width * TILE_WIDTH; }
