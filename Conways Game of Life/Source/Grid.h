@@ -1,20 +1,23 @@
 #pragma once
 #include<vector>
 #include"Tile.h"
+#include"Pen.h"
 
 class Grid {
 private:
 	std::vector<std::vector<Tile*>> grid;
-	const float TILE_WIDTH, TILE_HEIGHT;
-	float width, height;
+	float gridWidth, gridHeight, tileWidth, tileHeight;
+	sf::RenderWindow *windowHandle;
+	Pen pen;
 
 public:
-	Grid(int width, int height);
+	Grid(float gridWidth, float gridHeight, float tileWidth, float tileHeight);
 
 	void clear();
 	void update();
-	void render(sf::RenderWindow *windowHandle);
+	void render();
 	void set(sf::Vector2i mousePos);
+	void setWindow(sf::RenderWindow &windowHandle);
 	
 	float getWidth();
 	float getHeight();

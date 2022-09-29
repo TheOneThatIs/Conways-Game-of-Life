@@ -1,17 +1,17 @@
 #include "Grid.h"
 #include<iostream>
 
-Grid::Grid(int width = 10, int height = 10) : TILE_WIDTH(50), TILE_HEIGHT(50), width(width), height(height) {
-	grid.reserve(height);
+Grid::Grid(float gridWidth = 10, float gridHeight = 10, float tileWidth = 50, float tileHeight = 50) : gridWidth(gridWidth), gridHeight(gridHeight), tileWidth(tileWidth), tileHeight(tileHeight), pen(windowHandle) {
+	grid.reserve(gridHeight);
 
-	for (int i = 0; i < height; i++) {
+	for (int i = 0; i < gridHeight; i++) {
 		grid.emplace_back(std::vector<Tile*>());
-		grid.back().reserve(width);
+		grid.back().reserve(gridWidth);
 
-		for (int j = 0; j < width; j++) {
+		for (int j = 0; j < gridWidth; j++) {
 			grid[i].emplace_back(new Tile());
-			grid[i].back()->setPos(j * TILE_WIDTH, i * TILE_HEIGHT);
-			grid[i].back()->getShape()->setSize({TILE_WIDTH, TILE_HEIGHT});
+			grid[i].back()->setPos(j * tileWidth, i * tileHeight);
+			grid[i].back()->getShape()->setSize({tileWidth, tileHeight});
 		}
 	}
 }
@@ -27,16 +27,18 @@ void Grid::clear() {
 }
 
 void Grid::update() {
-	for (int i = 0; i < height; i++) {
-		for (int j = 0; j < width; j++) {
+	for (int i = 0; i < gridHeight; i++) {
+		for (int j = 0; j < gridWidth; j++) {
 			grid[1][2]->checkLivingConditions();
 		}
 	}
+
+	pen.update();
 }
 
-void Grid::render(sf::RenderWindow *windowHandle) {
-	for (int i = 0; i < height; i++) {
-		for (int j = 0; j < width; j++) {
+void Grid::render() {
+	for (int i = 0; i < gridHeight; i++) {
+		for (int j = 0; j < gridWidth; j++) {
 			if(grid[i][j]->isAlive) {
 				windowHandle->draw(*grid[i][j]->getShape());
 			}
@@ -45,8 +47,12 @@ void Grid::render(sf::RenderWindow *windowHandle) {
 }
 
 void Grid::set(sf::Vector2i mousePos) {
-	grid[mousePos.y / TILE_HEIGHT][mousePos.x / TILE_WIDTH ]->isAlive = !grid[mousePos.y / TILE_HEIGHT][mousePos.x / TILE_WIDTH]->isAlive;
+	grid[mousePos.y / tileHeight][mousePos.x / tileWidth ]->isAlive = !grid[mousePos.y / tileHeight][mousePos.x / tileWidth]->isAlive;
 }
 
-float Grid::getWidth() { return width * TILE_WIDTH; }
-float Grid::getHeight() { return height * TILE_HEIGHT; }
+void Grid::setWindow(sf::RenderWindow &windowHandle) {
+	this->windowHandle = &windowHandle;
+}
+
+float Grid::getWidth() { return gridWidth * tileWidth; }
+float Grid::getHeight() { return gridHeight * tileHeight; }

@@ -4,8 +4,9 @@
 #include"Grid.h"
 
 int main() {
-	Grid grid(25, 15);
+	Grid grid(50, 50, 10, 10);
 	sf::RenderWindow window(sf::VideoMode(grid.getWidth(), grid.getHeight()), "Window");
+	grid.setWindow(window);
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -20,7 +21,7 @@ int main() {
 		}
 
 		window.clear();
-		grid.render(&window);
+		grid.render();
 		window.display();
 	}
 
