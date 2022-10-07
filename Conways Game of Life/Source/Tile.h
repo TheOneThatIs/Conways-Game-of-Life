@@ -7,12 +7,13 @@ private:
 	sf::RectangleShape tile;
 
 public:
-	bool isAlive, willDie;
+	int numNeighboursAlive;
+	bool isAlive, willDie, willResurrect;
 
 public:
 	Tile();
 	
-	void checkLivingConditions();
+	bool checkLivingConditions();
 	void setPos(int x, int y);
 	sf::RectangleShape* getShape();
 };

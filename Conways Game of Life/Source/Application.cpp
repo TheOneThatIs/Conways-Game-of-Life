@@ -8,6 +8,8 @@ int main() {
 	Grid grid(&window, 10, 10, 50, 50);
 	window.create(sf::VideoMode(grid.getWidth(), grid.getHeight()), "Window");
 	grid.setWindow(window);
+	sf::Clock clock;
+	sf::Time elapsed = clock.getElapsedTime();
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -19,13 +21,27 @@ int main() {
 					grid.set(sf::Mouse::getPosition(window));
 				case sf::Event::MouseButtonPressed:
 					grid.set(sf::Mouse::getPosition(window));
+				case sf::Event::KeyPressed:
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+						grid.runSimulation();
+					}
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+						grid.stepsToSimulate = 1;
+					}
+						
 			}
-			grid.update();
 		}
 
 		window.clear();
 		grid.render();
+
+		if (elapsed.asSeconds() >= 0.25) {
+			grid.update();
+			elapsed = clock.restart();
+		}
 		window.display();
+
+		elapsed = clock.getElapsedTime();
 	}
 
 	grid.clear();
