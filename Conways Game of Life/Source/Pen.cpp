@@ -6,9 +6,6 @@ Pen::Pen(sf::RenderWindow *windowHandle, int tileWidth, int tileHeight) : window
 }
 
 bool Pen::update() {
-	std::cout << "isDown: " << isDown << std::endl;
-	std::cout << "hasDrawn: " << hasDrawn << std::endl;
-
 	gridPos = { sf::Mouse::getPosition(*windowHandle).x / tileWidth, sf::Mouse::getPosition(*windowHandle).y/tileHeight };
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

@@ -49,7 +49,8 @@ void Grid::render() {
 void Grid::set(sf::Vector2i mousePos) {
 	pen.update();
 	if (pen.isDrawing()) {
-		grid[pen.gridPos.y][pen.gridPos.x]->isAlive = !grid[pen.gridPos.y][pen.gridPos.x]->isAlive;
+		if(pen.gridPos.y < grid.size() && pen.gridPos.x < grid[0].size())
+			grid[pen.gridPos.y][pen.gridPos.x]->isAlive = !grid[pen.gridPos.y][pen.gridPos.x]->isAlive;
 	}
 }
 
