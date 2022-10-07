@@ -13,6 +13,6 @@ public:
 	Tile();
 	
 	void checkLivingConditions();
-	void setPos(float x, float y);
+	void setPos(int x, int y);
 	sf::RectangleShape* getShape();
 };

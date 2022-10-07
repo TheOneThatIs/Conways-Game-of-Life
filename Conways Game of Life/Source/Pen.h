@@ -3,11 +3,18 @@
 
 class Pen {
 private:
-	sf::RenderWindow &windowHandle;
-	sf::Vector2f gridPos;
+	sf::RenderWindow *windowHandle;
+	bool hasDrawn, isDown;
+	int tileWidth, tileHeight;
+	sf::Vector2i gridPosLast;
 
 public:
-	Pen(sf::RenderWindow* windowHandle);
+	sf::Vector2i gridPos;
 
-	void update();
+public:
+	Pen(sf::RenderWindow* windowHandle, int tileWidth, int tileHeight);
+
+	bool isDrawing();
+
+	bool update();
 };

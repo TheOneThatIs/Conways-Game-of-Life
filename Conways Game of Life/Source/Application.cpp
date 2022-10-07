@@ -4,8 +4,9 @@
 #include"Grid.h"
 
 int main() {
-	Grid grid(50, 50, 10, 10);
-	sf::RenderWindow window(sf::VideoMode(grid.getWidth(), grid.getHeight()), "Window");
+	sf::RenderWindow window;
+	Grid grid(&window, 10, 10, 50, 50);
+	window.create(sf::VideoMode(grid.getWidth(), grid.getHeight()), "Window");
 	grid.setWindow(window);
 
 	while (window.isOpen()) {
@@ -14,6 +15,8 @@ int main() {
 			switch (event.type) {
 				case sf::Event::Closed:
 					window.close();
+				case sf::Event::MouseMoved:
+					grid.set(sf::Mouse::getPosition(window));
 				case sf::Event::MouseButtonPressed:
 					grid.set(sf::Mouse::getPosition(window));
 			}

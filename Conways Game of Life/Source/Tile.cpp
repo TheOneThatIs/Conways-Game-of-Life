@@ -11,8 +11,8 @@ void Tile::checkLivingConditions() {
 
 }
 
-void Tile::setPos(float x, float y) {
-	tile.setPosition({ x, y });
+void Tile::setPos(int x, int y) {
+	tile.setPosition({ (float)x, (float)y });
 }
 
 sf::RectangleShape* Tile::getShape() {

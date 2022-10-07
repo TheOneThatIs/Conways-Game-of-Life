@@ -6,12 +6,12 @@
 class Grid {
 private:
 	std::vector<std::vector<Tile*>> grid;
-	float gridWidth, gridHeight, tileWidth, tileHeight;
 	sf::RenderWindow *windowHandle;
+	int gridWidth, gridHeight, tileWidth, tileHeight;
 	Pen pen;
 
 public:
-	Grid(float gridWidth, float gridHeight, float tileWidth, float tileHeight);
+	Grid(sf::RenderWindow* windowHandle, int gridWidth, int gridHeight, int tileWidth, int tileHeight);
 
 	void clear();
 	void update();
@@ -19,6 +19,6 @@ public:
 	void set(sf::Vector2i mousePos);
 	void setWindow(sf::RenderWindow &windowHandle);
 	
-	float getWidth();
-	float getHeight();
+	int getWidth();
+	int getHeight();
 };
